@@ -125,6 +125,7 @@ export function reducer(state: AppState, action: Action): AppState {
     case 'ADD_ITEM': {
       const now = nowISO()
       const backlogStatus = state.statuses.find(s => s.id === 'backlog') ?? state.statuses[0]
+      if (!backlogStatus) return state
       const item = { id: generateId(), projectId: action.projectId, title: action.title, description: '', statusId: backlogStatus.id, deadline: null, links: [], createdAt: now, updatedAt: now }
       const activity = createActivityEntry(item.id, 'item_created', 'Item created')
       return { ...state, items: [...state.items, item], activityEntries: [...state.activityEntries, activity], selectedItemId: item.id }
@@ -150,8 +151,9 @@ export function reducer(state: AppState, action: Action): AppState {
     case 'CHANGE_ITEM_STATUS': {
       const item = state.items.find(i => i.id === action.id)
       if (!item) return state
-      const oldStatus = state.statuses.find(s => s.id === item.statusId)
       const newStatus = state.statuses.find(s => s.id === action.statusId)
+      if (!newStatus) return state
+      const oldStatus = state.statuses.find(s => s.id === item.statusId)
       const description = `Status changed: ${oldStatus?.label ?? '?'} → ${newStatus?.label ?? '?'}`
       const activity = createActivityEntry(action.id, 'status_changed', description)
       return {
@@ -215,7 +217,7 @@ export function reducer(state: AppState, action: Action): AppState {
 
     // ── Statuses ──────────────────────────────────────────────────
     case 'ADD_STATUS': {
-      const maxOrder = Math.max(...state.statuses.map(s => s.order), -1)
+      const maxOrder = state.statuses.reduce((m, s) => Math.max(m, s.order), -1)
       const status = { id: generateId(), label: action.label, color: action.color, scope: action.scope, ...(action.projectId !== undefined && { projectId: action.projectId }), isDefault: false, order: maxOrder + 1 }
       return { ...state, statuses: [...state.statuses, status] }
     }
@@ -228,14 +230,14 @@ export function reducer(state: AppState, action: Action): AppState {
       }
     case 'DELETE_STATUS':
       return { ...state, statuses: state.statuses.filter(s => s.id !== action.id) }
-    case 'REORDER_STATUSES':
-      return {
-        ...state,
-        statuses: action.ids.map((id, order) => {
-          const s = state.statuses.find(s => s.id === id)!
-          return { ...s, order }
-        }),
-      }
+    case 'REORDER_STATUSES': {
+      const statusMap = new Map(state.statuses.map(s => [s.id, s]))
+      const reordered = action.ids.flatMap((id, order) => {
+        const s = statusMap.get(id)
+        return s ? [{ ...s, order }] : []
+      })
+      return { ...state, statuses: reordered }
+    }
 
     // ── UI ────────────────────────────────────────────────────────
     case 'SELECT_BU':

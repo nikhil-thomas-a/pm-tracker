@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer, type ReactNode } from 'react'
+import { createContext, useContext, useEffect, useReducer, useRef, type ReactNode } from 'react'
 import { reducer, INITIAL_STATE, type Action } from './reducer'
 import type { AppState } from '../types'
 import { loadData, saveData } from '../data/storage'
@@ -12,15 +12,18 @@ const AppContext = createContext<AppContextValue | null>(null)
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE)
+  const hasLoaded = useRef(false)
 
   // Load from localStorage on mount
   useEffect(() => {
     const data = loadData()
     dispatch({ type: 'LOAD_DATA', data })
+    hasLoaded.current = true
   }, [])
 
   // Persist to localStorage on every state change (skip UI-only fields)
   useEffect(() => {
+    if (!hasLoaded.current) return
     const { selectedBuId, selectedProjectId, selectedItemId, activeTab, showSettings, toast, ...data } = state
     saveData(data)
   }, [state])
