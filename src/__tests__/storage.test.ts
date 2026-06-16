@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { loadData, saveData } from '../data/storage'
+import { loadData, saveData, clearData } from '../data/storage'
 import type { AppData } from '../types'
 import { DEFAULT_STATUSES } from '../data/defaults'
 
@@ -21,6 +21,13 @@ describe('loadData', () => {
     expect(data.businessUnits).toEqual([])
     expect(data.statuses).toHaveLength(4)
   })
+
+  it('returns default data when localStorage contains invalid JSON', () => {
+    localStorage.setItem('pmtracker_v1', '{ broken json')
+    const data = loadData()
+    expect(data.businessUnits).toEqual([])
+    expect(data.statuses).toHaveLength(4)
+  })
 })
 
 describe('saveData + loadData', () => {
@@ -33,5 +40,15 @@ describe('saveData + loadData', () => {
     const loaded = loadData()
     expect(loaded.businessUnits).toHaveLength(1)
     expect(loaded.businessUnits[0].name).toBe('Engineering')
+  })
+})
+
+describe('clearData', () => {
+  it('clearData removes persisted data so next load returns defaults', () => {
+    const data = { ...EMPTY_DATA, businessUnits: [{ id: '1', name: 'Eng', description: '', createdAt: '' }] }
+    saveData(data)
+    clearData()
+    const loaded = loadData()
+    expect(loaded.businessUnits).toHaveLength(0)
   })
 })

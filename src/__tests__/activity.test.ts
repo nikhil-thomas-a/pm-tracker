@@ -16,4 +16,9 @@ describe('createActivityEntry', () => {
     const b = createActivityEntry('x', 'note_added', 'Note added')
     expect(a.id).not.toBe(b.id)
   })
+
+  it('generated id looks like a UUID', () => {
+    const entry = createActivityEntry('item-x', 'item_created', 'Item created')
+    expect(entry.id).toMatch(/^[0-9a-f-]{36}$/i)
+  })
 })
