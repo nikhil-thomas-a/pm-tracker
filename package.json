@@ -1,0 +1,33 @@
+{
+  "name": "pm-tracker",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "@tiptap/react": "^2.6.6",
+    "@tiptap/starter-kit": "^2.6.6",
+    "@tiptap/extension-underline": "^2.6.6",
+    "@tiptap/extension-link": "^2.6.6",
+    "date-fns": "^3.6.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.2",
+    "vitest": "^2.0.5",
+    "tailwindcss": "^3.4.10",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.41"
+  }
+}
