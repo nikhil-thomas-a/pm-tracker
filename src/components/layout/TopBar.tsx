@@ -11,7 +11,7 @@ export default function TopBar() {
     a.href = url
     a.download = `pmtracker-backup-${new Date().toISOString().slice(0, 10)}.json`
     a.click()
-    URL.revokeObjectURL(url)
+    setTimeout(() => URL.revokeObjectURL(url), 100)
     dispatch({ type: 'SET_TOAST', toast: { message: 'Backup exported', type: 'success' } })
   }
 
@@ -19,13 +19,15 @@ export default function TopBar() {
     const input = document.createElement('input')
     input.type = 'file'
     input.accept = '.json'
+    document.body.appendChild(input)
     input.onchange = async () => {
+      document.body.removeChild(input)
       const file = input.files?.[0]
       if (!file) return
       try {
         const text = await file.text()
         const data = JSON.parse(text)
-        if (!data.businessUnits || !data.statuses) throw new Error('Invalid file')
+        if (!Array.isArray(data.businessUnits) || !Array.isArray(data.statuses)) throw new Error('Invalid file')
         if (confirm('This will overwrite all current data. Continue?')) {
           dispatch({ type: 'IMPORT_DATA', data })
         }
