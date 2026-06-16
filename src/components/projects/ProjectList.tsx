@@ -44,7 +44,7 @@ export default function ProjectList() {
                 className="flex-1 text-xs bg-zinc-700 text-zinc-100 border border-zinc-600 rounded px-2 py-1 outline-none focus:border-teal-500"
               />
               <button type="submit" className="text-xs text-teal-400 px-1">Add</button>
-              <button type="button" onClick={() => setAdding(false)} className="text-xs text-zinc-500 px-1">✕</button>
+              <button type="button" onClick={() => { setAdding(false); setName('') }} className="text-xs text-zinc-500 px-1">✕</button>
             </form>
           ) : (
             <button onClick={() => setAdding(true)} className="text-[11px] text-teal-500 hover:text-teal-400">

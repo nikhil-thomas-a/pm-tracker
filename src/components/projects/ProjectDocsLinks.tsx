@@ -41,7 +41,7 @@ export default function ProjectDocsLinks() {
           <input value={url} onChange={e => setUrl(e.target.value)} placeholder="https://..." className="text-xs bg-zinc-700 text-zinc-100 border border-zinc-600 rounded px-2 py-1 outline-none focus:border-teal-500" />
           <div className="flex gap-1">
             <button type="submit" className="text-xs text-teal-400">Add</button>
-            <button type="button" onClick={() => setAdding(false)} className="text-xs text-zinc-500">✕</button>
+            <button type="button" onClick={() => { setAdding(false); setLabel(''); setUrl('') }} className="text-xs text-zinc-500">✕</button>
           </div>
         </form>
       ) : (
