@@ -13,14 +13,14 @@ export default function RightPanel() {
 
   if (!selectedItemId) {
     return (
-      <div className="flex-1 bg-zinc-900 flex items-center justify-center">
-        <EmptyState icon="👆" title="Select an item" subtitle="Pick one from the middle panel" />
+      <div className="flex-1 bg-pm-bg flex items-center justify-center">
+        <EmptyState icon="→" title="Select an item" subtitle="Pick one from the middle panel" />
       </div>
     )
   }
 
   return (
-    <div className="flex-1 bg-zinc-900 flex flex-col overflow-hidden">
+    <div className="flex-1 bg-pm-bg flex flex-col overflow-hidden">
       <ItemHeader />
       <TabBar />
       <div className="flex-1 overflow-y-auto">

@@ -11,16 +11,16 @@ const TABS: { id: TabId; label: string }[] = [
 export default function TabBar() {
   const { state, dispatch } = useApp()
   return (
-    <div className="flex border-b border-zinc-700 shrink-0">
+    <div className="flex border-b border-pm-border-subtle px-1 pt-1 shrink-0 bg-pm-surface">
       {TABS.map(tab => (
         <button
           key={tab.id}
           onClick={() => dispatch({ type: 'SET_ACTIVE_TAB', tab: tab.id })}
-          className={`px-3 py-2 text-[11px] border-b-2 transition-colors ${
+          className={
             state.activeTab === tab.id
-              ? 'border-teal-500 text-teal-400'
-              : 'border-transparent text-zinc-500 hover:text-zinc-300'
-          }`}
+              ? 'text-pm-accent text-[10px] uppercase tracking-[0.1em] font-medium border-b-2 border-pm-accent pb-2 px-3 transition-colors'
+              : 'text-pm-muted text-[10px] uppercase tracking-[0.1em] font-medium border-b-2 border-transparent pb-2 px-3 hover:text-pm-text-2 transition-colors'
+          }
         >
           {tab.label}
         </button>

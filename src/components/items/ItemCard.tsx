@@ -24,14 +24,14 @@ export default function ItemCard({ item }: Props) {
   return (
     <button
       onClick={() => dispatch({ type: 'SELECT_ITEM', id: item.id })}
-      className={`group w-full text-left px-3 py-2 rounded-r border-l-2 transition-colors mb-1 ${
+      className={`group w-full text-left px-3 py-1.5 border-l-2 transition-colors mb-px ${
         isSelected
-          ? 'border-teal-500 bg-zinc-700 text-white'
-          : 'border-transparent hover:bg-zinc-800 text-zinc-400'
+          ? 'border-pm-accent bg-pm-surface-up'
+          : 'border-transparent hover:bg-pm-surface'
       }`}
     >
       <div className="flex items-start justify-between gap-2">
-        <span className={`text-xs font-medium flex-1 ${isDone ? 'line-through text-zinc-600' : isSelected ? 'text-white' : 'text-zinc-300'}`}>
+        <span className={`text-xs font-medium flex-1 ${isDone ? 'line-through text-pm-dim' : isSelected ? 'text-pm-text' : 'text-pm-text-2'}`}>
           {item.title}
         </span>
         <div className="flex items-center gap-1 shrink-0">
@@ -39,16 +39,16 @@ export default function ItemCard({ item }: Props) {
           <span
             role="button"
             onClick={handleDelete}
-            className="opacity-0 group-hover:opacity-100 text-zinc-600 hover:text-red-400 text-[11px] transition-opacity leading-none"
+            className="opacity-0 group-hover:opacity-100 text-pm-muted hover:text-pm-danger text-[10px] transition-opacity leading-none"
             title="Delete item"
           >
             ✕
           </span>
         </div>
       </div>
-      <div className="flex gap-2 mt-1 text-[10px] text-zinc-600">
+      <div className="flex gap-2 mt-1 text-[9px] text-pm-muted">
         {item.deadline && (
-          <span className={overdue ? 'text-red-400' : ''}>
+          <span className={overdue ? 'text-pm-danger' : ''}>
             ⏰ {formatDate(item.deadline)}{overdue && ' · overdue'}
           </span>
         )}

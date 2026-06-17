@@ -18,11 +18,11 @@ export default function StatusFilterTabs({ activeStatusId, onChange }: Props) {
         <button
           key={s.id}
           onClick={() => onChange(s.id)}
-          className={`text-[10px] px-2 py-0.5 rounded-full border transition-colors ${
+          className={
             activeStatusId === s.id
-              ? 'bg-teal-500 text-white border-teal-500'
-              : 'border-zinc-600 text-zinc-400 hover:border-zinc-500 hover:text-zinc-300'
-          }`}
+              ? 'bg-pm-accent text-pm-bg text-[9px] font-semibold px-2 py-0.5 rounded-full'
+              : 'border border-pm-border text-pm-muted text-[9px] px-2 py-0.5 rounded-full hover:text-pm-text-2 transition-colors'
+          }
         >
           {s.label}
         </button>

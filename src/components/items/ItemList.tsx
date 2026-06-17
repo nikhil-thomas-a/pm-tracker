@@ -44,13 +44,13 @@ export default function ItemList() {
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
-      <div className="px-3 pt-3 pb-2 border-b border-zinc-700">
-        <p className="text-xs font-semibold text-zinc-200 truncate">{project.name}</p>
+      <div className="px-3 pt-3 pb-2 border-b border-pm-border-subtle">
+        <p className="text-[11px] font-semibold text-pm-text truncate">{project.name}</p>
         <input
           value={search}
           onChange={e => setSearch(e.target.value)}
           placeholder="Search items…"
-          className="mt-2 w-full text-[11px] bg-transparent text-zinc-300 placeholder-zinc-600 outline-none border-b border-transparent focus:border-zinc-600 transition-colors pb-1"
+          className="mt-1.5 w-full text-[10px] bg-transparent text-pm-text-2 placeholder-pm-muted outline-none border-b border-transparent focus:border-pm-border transition-colors pb-0.5"
         />
       </div>
       <StatusFilterTabs activeStatusId={filterStatus} onChange={setFilterStatus} />
@@ -61,7 +61,7 @@ export default function ItemList() {
           projectItems.map(item => <ItemCard key={item.id} item={item} />)
         )}
       </div>
-      <div className="px-3 py-2 border-t border-zinc-700">
+      <div className="px-3 py-2 border-t border-pm-border-subtle">
         {adding ? (
           <form onSubmit={submit} className="flex gap-1">
             <input
@@ -69,13 +69,13 @@ export default function ItemList() {
               value={title}
               onChange={e => setTitle(e.target.value)}
               placeholder="Item title"
-              className="flex-1 text-xs bg-zinc-700 text-zinc-100 border border-zinc-600 rounded px-2 py-1 outline-none focus:border-teal-500"
+              className="flex-1 text-[10px] bg-pm-surface-up text-pm-text border border-pm-border rounded px-2 py-1 outline-none focus:border-pm-accent"
             />
-            <button type="submit" className="text-xs text-teal-400">Add</button>
-            <button type="button" onClick={() => { setAdding(false); setTitle('') }} className="text-xs text-zinc-500">✕</button>
+            <button type="submit" className="text-[10px] text-pm-accent">Add</button>
+            <button type="button" onClick={() => { setAdding(false); setTitle('') }} className="text-[10px] text-pm-muted">✕</button>
           </form>
         ) : (
-          <button onClick={() => setAdding(true)} className="text-[11px] text-teal-500 hover:text-teal-400">
+          <button onClick={() => setAdding(true)} className="text-[10px] text-pm-accent hover:text-pm-text-2">
             + New Item
           </button>
         )}
