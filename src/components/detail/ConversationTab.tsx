@@ -9,15 +9,17 @@ export default function ConversationTab() {
   const { selectedItemId, conversationEntries } = state
   const bottomRef = useRef<HTMLDivElement>(null)
 
-  if (!selectedItemId) return null
-
-  const entries = conversationEntries
-    .filter(e => e.itemId === selectedItemId)
-    .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+  const entries = selectedItemId
+    ? conversationEntries
+        .filter(e => e.itemId === selectedItemId)
+        .sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+    : []
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [entries.length])
+
+  if (!selectedItemId) return null
 
   return (
     <div className="flex flex-col h-full">
