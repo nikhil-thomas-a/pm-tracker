@@ -130,7 +130,20 @@ export function reducer(state: AppState, action: Action): AppState {
       const activity = createActivityEntry(item.id, 'item_created', 'Item created')
       return { ...state, items: [...state.items, item], activityEntries: [...state.activityEntries, activity], selectedItemId: item.id }
     }
-    case 'UPDATE_ITEM':
+    case 'UPDATE_ITEM': {
+      const existing = state.items.find(i => i.id === action.id)
+      if (!existing) return state
+
+      const newActivities: typeof state.activityEntries = []
+
+      if (action.deadline !== undefined && action.deadline !== existing.deadline) {
+        if (action.deadline) {
+          newActivities.push(createActivityEntry(action.id, 'deadline_set', `Deadline set: ${action.deadline.slice(0, 10)}`))
+        } else {
+          newActivities.push(createActivityEntry(action.id, 'deadline_cleared', 'Deadline cleared'))
+        }
+      }
+
       return {
         ...state,
         items: state.items.map(i =>
@@ -138,7 +151,9 @@ export function reducer(state: AppState, action: Action): AppState {
             ? { ...i, ...(action.title !== undefined && { title: action.title }), ...(action.description !== undefined && { description: action.description }), ...(action.deadline !== undefined && { deadline: action.deadline }), updatedAt: nowISO() }
             : i
         ),
+        activityEntries: [...state.activityEntries, ...newActivities],
       }
+    }
     case 'DELETE_ITEM':
       return {
         ...state,

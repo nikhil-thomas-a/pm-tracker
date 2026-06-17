@@ -46,6 +46,28 @@ describe('reducer — SubTask', () => {
   })
 })
 
+describe('reducer — UPDATE_ITEM deadline', () => {
+  it('generates deadline_set activity when deadline is added', () => {
+    const withItem = reducer(INITIAL_STATE, { type: 'ADD_ITEM', projectId: 'p1', title: 'Test' })
+    const item = withItem.items[0]
+    const after = reducer(withItem, { type: 'UPDATE_ITEM', id: item.id, deadline: '2026-12-31' })
+    const acts = after.activityEntries.filter(a => a.itemId === item.id)
+    const deadlineAct = acts.find(a => a.type === 'deadline_set')
+    expect(deadlineAct).toBeDefined()
+    expect(deadlineAct?.description).toContain('2026-12-31')
+  })
+
+  it('generates deadline_cleared activity when deadline is removed', () => {
+    const withItem = reducer(INITIAL_STATE, { type: 'ADD_ITEM', projectId: 'p1', title: 'Test' })
+    const item = withItem.items[0]
+    const withDeadline = reducer(withItem, { type: 'UPDATE_ITEM', id: item.id, deadline: '2026-12-31' })
+    const after = reducer(withDeadline, { type: 'UPDATE_ITEM', id: item.id, deadline: null })
+    const acts = after.activityEntries.filter(a => a.itemId === item.id)
+    const cleared = acts.find(a => a.type === 'deadline_cleared')
+    expect(cleared).toBeDefined()
+  })
+})
+
 describe('reducer — IMPORT_DATA', () => {
   it('replaces all data and sets a success toast', () => {
     const importData = { ...INITIAL_STATE, businessUnits: [{ id: 'x', name: 'Imported BU', description: '', createdAt: '' }] }
