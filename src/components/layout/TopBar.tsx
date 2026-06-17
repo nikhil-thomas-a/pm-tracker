@@ -47,21 +47,23 @@ export default function TopBar() {
   }
 
   return (
-    <header className="flex items-center justify-between px-4 py-2 bg-zinc-800 border-b border-zinc-700 shrink-0">
-      <span className="font-bold text-teal-400 tracking-tight">PM Tracker</span>
-      <div className="flex items-center gap-3">
-        <button onClick={handleExport} className="text-xs text-zinc-400 hover:text-zinc-200 transition-colors">
-          ↓ Export
+    <header className="flex items-center justify-between px-4 h-10 bg-pm-surface border-b border-pm-border-subtle shrink-0">
+      <span className="text-sm font-semibold text-pm-accent" style={{ letterSpacing: '-0.02em' }}>
+        PM Tracker
+      </span>
+      <div className="flex items-center gap-4">
+        <button onClick={handleExport} className="text-[11px] text-pm-muted hover:text-pm-text-2 transition-colors">
+          Export
         </button>
-        <button onClick={handleImport} className="text-xs text-zinc-400 hover:text-zinc-200 transition-colors">
-          ↑ Import
+        <button onClick={handleImport} className="text-[11px] text-pm-muted hover:text-pm-text-2 transition-colors">
+          Import
         </button>
         <button
           onClick={() => dispatch({ type: 'TOGGLE_SETTINGS' })}
-          className="text-xs text-zinc-400 hover:text-zinc-200 transition-colors"
+          className="text-[11px] text-pm-muted hover:text-pm-text-2 transition-colors"
           title="Settings"
         >
-          ⚙
+          Settings
         </button>
       </div>
     </header>

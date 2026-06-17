@@ -21,24 +21,24 @@ export default function ProjectListItem({ project }: Props) {
   return (
     <button
       onClick={() => dispatch({ type: 'SELECT_PROJECT', id: project.id })}
-      className={`group w-full text-left px-3 py-2 rounded-r transition-colors border-l-2 ${
+      className={`group w-full text-left px-3 py-1.5 transition-colors border-l-2 ${
         isSelected
-          ? 'border-teal-500 bg-zinc-700 text-white'
-          : 'border-transparent text-zinc-400 hover:text-zinc-200 hover:bg-zinc-700/50'
+          ? 'border-pm-accent bg-pm-surface-up text-pm-text'
+          : 'border-transparent text-pm-text-2 hover:text-pm-text hover:bg-pm-surface-up'
       }`}
     >
       <div className="flex items-center justify-between gap-1">
-        <p className="text-xs font-medium truncate flex-1">{project.name}</p>
+        <p className="text-[11px] font-medium truncate flex-1" style={{ letterSpacing: '-0.01em' }}>{project.name}</p>
         <span
           role="button"
           onClick={handleDelete}
-          className="opacity-0 group-hover:opacity-100 text-zinc-600 hover:text-red-400 text-[11px] transition-opacity shrink-0"
+          className="opacity-0 group-hover:opacity-100 text-pm-muted hover:text-pm-danger text-[10px] transition-opacity shrink-0"
           title="Delete project"
         >
           ✕
         </span>
       </div>
-      <p className="text-[10px] text-zinc-500 mt-0.5">
+      <p className="text-[9px] text-pm-muted mt-0.5">
         {state.items.filter(i => i.projectId === project.id).length} items
       </p>
     </button>

@@ -22,10 +22,10 @@ export default function ProjectList() {
 
   return (
     <div className="flex-1 flex flex-col overflow-hidden">
-      <p className="text-[10px] uppercase tracking-widest text-zinc-500 px-3 pt-3 pb-1">Projects</p>
+      <p className="text-[9px] uppercase tracking-[0.1em] font-medium text-pm-muted px-3 pt-3 pb-1">Projects</p>
       <div className="flex-1 overflow-y-auto">
         {filtered.length === 0 ? (
-          <p className="text-[11px] text-zinc-600 px-3 py-2">
+          <p className="text-[11px] text-pm-muted px-3 py-2">
             {selectedBuId ? 'No projects yet' : 'Select a unit first'}
           </p>
         ) : (
@@ -33,7 +33,7 @@ export default function ProjectList() {
         )}
       </div>
       {selectedBuId && (
-        <div className="px-3 pb-3 pt-2 border-t border-zinc-700">
+        <div className="px-3 pb-3 pt-2 border-t border-pm-border-subtle">
           {adding ? (
             <form onSubmit={submit} className="flex gap-1">
               <input
@@ -41,13 +41,13 @@ export default function ProjectList() {
                 value={name}
                 onChange={e => setName(e.target.value)}
                 placeholder="Project name"
-                className="flex-1 text-xs bg-zinc-700 text-zinc-100 border border-zinc-600 rounded px-2 py-1 outline-none focus:border-teal-500"
+                className="flex-1 text-[11px] bg-pm-surface-up text-pm-text border border-pm-border rounded px-2 py-1 outline-none focus:border-pm-accent"
               />
-              <button type="submit" className="text-xs text-teal-400 px-1">Add</button>
-              <button type="button" onClick={() => { setAdding(false); setName('') }} className="text-xs text-zinc-500 px-1">✕</button>
+              <button type="submit" className="text-[10px] text-pm-accent px-1">Add</button>
+              <button type="button" onClick={() => { setAdding(false); setName('') }} className="text-[10px] text-pm-muted px-1">✕</button>
             </form>
           ) : (
-            <button onClick={() => setAdding(true)} className="text-[11px] text-teal-500 hover:text-teal-400">
+            <button onClick={() => setAdding(true)} className="text-[10px] text-pm-accent hover:text-pm-text-2">
               + New Project
             </button>
           )}

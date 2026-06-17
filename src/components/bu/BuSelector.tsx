@@ -16,17 +16,17 @@ export default function BuSelector() {
   }
 
   return (
-    <div className="px-3 pt-3 pb-2 border-b border-zinc-700">
-      <p className="text-[10px] uppercase tracking-widest text-zinc-500 mb-2">Business Units</p>
+    <div className="px-3 pt-3 pb-2 border-b border-pm-border-subtle">
+      <p className="text-[9px] uppercase tracking-[0.1em] font-medium text-pm-muted mb-2">Business Units</p>
       <div className="flex flex-wrap gap-1 mb-2">
         {businessUnits.map(bu => (
           <div key={bu.id} className="group relative inline-flex items-center">
             <button
               onClick={() => dispatch({ type: 'SELECT_BU', id: bu.id })}
-              className={`px-2 py-0.5 rounded text-xs transition-colors pr-5 ${
+              className={`text-[10px] font-medium px-2 py-0.5 rounded pr-5 ${
                 selectedBuId === bu.id
-                  ? 'bg-teal-500 text-white'
-                  : 'bg-zinc-700 text-zinc-300 hover:bg-zinc-600'
+                  ? 'bg-pm-accent text-pm-bg'
+                  : 'bg-pm-surface-up text-pm-text-2 hover:text-pm-text transition-colors'
               }`}
             >
               {bu.name}
@@ -41,7 +41,7 @@ export default function BuSelector() {
                   : `Delete "${bu.name}"?`
                 if (confirm(msg)) dispatch({ type: 'DELETE_BU', id: bu.id })
               }}
-              className="absolute right-0.5 opacity-0 group-hover:opacity-100 text-[9px] text-zinc-400 hover:text-red-400 transition-opacity w-4 h-4 flex items-center justify-center"
+              className="absolute right-0.5 opacity-0 group-hover:opacity-100 text-[9px] text-pm-muted hover:text-pm-danger transition-opacity w-4 h-4 flex items-center justify-center"
               title="Delete unit"
             >
               ✕
@@ -56,13 +56,13 @@ export default function BuSelector() {
             value={name}
             onChange={e => setName(e.target.value)}
             placeholder="Unit name"
-            className="flex-1 text-xs bg-zinc-700 text-zinc-100 border border-zinc-600 rounded px-2 py-1 outline-none focus:border-teal-500"
+            className="flex-1 text-[11px] bg-pm-surface-up text-pm-text border border-pm-border rounded px-2 py-1 outline-none focus:border-pm-accent"
           />
-          <button type="submit" className="text-xs text-teal-400 hover:text-teal-300 px-1">Add</button>
-          <button type="button" onClick={() => { setAdding(false); setName('') }} className="text-xs text-zinc-500 hover:text-zinc-300 px-1">✕</button>
+          <button type="submit" className="text-[10px] text-pm-accent hover:text-pm-text-2 px-1">Add</button>
+          <button type="button" onClick={() => { setAdding(false); setName('') }} className="text-[10px] text-pm-muted hover:text-pm-text-2 px-1">✕</button>
         </form>
       ) : (
-        <button onClick={() => setAdding(true)} className="text-[11px] text-teal-500 hover:text-teal-400">
+        <button onClick={() => setAdding(true)} className="text-[10px] text-pm-accent hover:text-pm-text-2">
           + New Unit
         </button>
       )}
