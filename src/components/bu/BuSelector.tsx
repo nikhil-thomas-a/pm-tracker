@@ -33,7 +33,8 @@ export default function BuSelector() {
             </button>
             <button
               type="button"
-              onClick={() => {
+              onClick={e => {
+                e.stopPropagation()
                 const projectCount = state.projects.filter(p => p.businessUnitIds.includes(bu.id)).length
                 const msg = projectCount > 0
                   ? `Delete "${bu.name}" and its ${projectCount} project(s)?`
