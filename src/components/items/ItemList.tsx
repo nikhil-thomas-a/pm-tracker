@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useApp } from '../../context/AppContext'
 import ItemCard from './ItemCard'
 import StatusFilterTabs from './StatusFilterTabs'
@@ -10,6 +10,8 @@ export default function ItemList() {
   const [filterStatus, setFilterStatus] = useState<string | 'all'>('all')
   const [adding, setAdding] = useState(false)
   const [title, setTitle] = useState('')
+
+  useEffect(() => { setFilterStatus('all') }, [selectedProjectId])
 
   const project = state.projects.find(p => p.id === selectedProjectId)
   const projectItems = items
