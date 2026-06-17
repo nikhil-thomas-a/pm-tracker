@@ -20,17 +20,32 @@ export default function BuSelector() {
       <p className="text-[10px] uppercase tracking-widest text-zinc-500 mb-2">Business Units</p>
       <div className="flex flex-wrap gap-1 mb-2">
         {businessUnits.map(bu => (
-          <button
-            key={bu.id}
-            onClick={() => dispatch({ type: 'SELECT_BU', id: bu.id })}
-            className={`px-2 py-0.5 rounded text-xs transition-colors ${
-              selectedBuId === bu.id
-                ? 'bg-teal-500 text-white'
-                : 'bg-zinc-700 text-zinc-300 hover:bg-zinc-600'
-            }`}
-          >
-            {bu.name}
-          </button>
+          <div key={bu.id} className="group relative inline-flex items-center">
+            <button
+              onClick={() => dispatch({ type: 'SELECT_BU', id: bu.id })}
+              className={`px-2 py-0.5 rounded text-xs transition-colors pr-5 ${
+                selectedBuId === bu.id
+                  ? 'bg-teal-500 text-white'
+                  : 'bg-zinc-700 text-zinc-300 hover:bg-zinc-600'
+              }`}
+            >
+              {bu.name}
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                const projectCount = state.projects.filter(p => p.businessUnitIds.includes(bu.id)).length
+                const msg = projectCount > 0
+                  ? `Delete "${bu.name}" and its ${projectCount} project(s)?`
+                  : `Delete "${bu.name}"?`
+                if (confirm(msg)) dispatch({ type: 'DELETE_BU', id: bu.id })
+              }}
+              className="absolute right-0.5 opacity-0 group-hover:opacity-100 text-[9px] text-zinc-400 hover:text-red-400 transition-opacity w-4 h-4 flex items-center justify-center"
+              title="Delete unit"
+            >
+              ✕
+            </button>
+          </div>
         ))}
       </div>
       {adding ? (
