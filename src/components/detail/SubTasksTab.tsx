@@ -29,7 +29,7 @@ export default function SubTasksTab() {
         <label key={st.id} className="flex items-center gap-2 mb-2 group cursor-pointer">
           <input
             type="checkbox"
-            checked={false}
+            checked={st.done}
             onChange={() => dispatch({ type: 'TOGGLE_SUBTASK', id: st.id })}
             className="accent-teal-500 w-3.5 h-3.5"
           />
@@ -50,7 +50,7 @@ export default function SubTasksTab() {
             <label key={st.id} className="flex items-center gap-2 mb-2 group cursor-pointer opacity-50">
               <input
                 type="checkbox"
-                checked={true}
+                checked={st.done}
                 onChange={() => dispatch({ type: 'TOGGLE_SUBTASK', id: st.id })}
                 className="accent-teal-500 w-3.5 h-3.5"
               />
