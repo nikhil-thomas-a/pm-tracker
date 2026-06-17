@@ -39,12 +39,12 @@ export default function ActivityTab() {
               style={{ background: DOT_COLORS[entry.type] ?? '#71717a' }}
             />
             {idx < entries.length - 1 && (
-              <div className="w-px flex-1 bg-zinc-700 mt-1" />
+              <div className="w-px flex-1 bg-pm-border mt-1" />
             )}
           </div>
           <div className="pb-4 flex-1">
-            <p className="text-xs text-zinc-300">{entry.description}</p>
-            <p className="text-[10px] text-zinc-600 mt-0.5">{formatDateTime(entry.createdAt)}</p>
+            <p className="text-xs text-pm-text-2">{entry.description}</p>
+            <p className="text-[9px] text-pm-muted mt-0.5">{formatDateTime(entry.createdAt)}</p>
           </div>
         </div>
       ))}

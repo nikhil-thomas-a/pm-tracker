@@ -23,7 +23,7 @@ export default function ConversationCompose({ itemId }: Props) {
   }
 
   return (
-    <div className="border-t border-zinc-700 p-3">
+    <div className="border-t border-pm-border p-3">
       <div className="flex gap-1 mb-2">
         {[
           { label: 'B', action: () => editor?.chain().focus().toggleBold().run() },
@@ -31,18 +31,18 @@ export default function ConversationCompose({ itemId }: Props) {
           { label: 'U', action: () => editor?.chain().focus().toggleUnderline().run() },
           { label: '•', action: () => editor?.chain().focus().toggleBulletList().run() },
         ].map(({ label, action }) => (
-          <button key={label} onClick={action} className="text-xs text-zinc-500 hover:text-zinc-200 border border-zinc-700 rounded px-1.5 py-0.5 transition-colors">
+          <button key={label} onClick={action} className="text-xs text-pm-muted hover:text-pm-text border border-pm-border rounded px-1.5 py-0.5 transition-colors">
             {label}
           </button>
         ))}
       </div>
-      <div className="bg-zinc-800 border border-zinc-700 rounded-lg overflow-hidden mb-2">
+      <div className="bg-pm-surface-up border border-pm-border rounded-lg overflow-hidden mb-2">
         <EditorContent editor={editor} />
       </div>
       <div className="flex justify-end">
         <button
           onClick={submit}
-          className="bg-teal-600 hover:bg-teal-500 text-white text-xs font-semibold px-3 py-1.5 rounded transition-colors"
+          className="bg-pm-accent hover:opacity-90 text-pm-bg text-xs font-semibold px-3 py-1.5 rounded transition-opacity"
         >
           Add entry
         </button>
