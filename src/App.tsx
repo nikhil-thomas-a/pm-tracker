@@ -14,20 +14,24 @@ function Welcome() {
     dispatch({ type: 'ADD_BU', name: name.trim(), description: '' })
   }
   return (
-    <div className="flex-1 flex items-center justify-center">
-      <div className="text-center max-w-sm">
-        <p className="text-3xl mb-3">📋</p>
-        <h1 className="text-lg font-bold text-white mb-1">Welcome to PM Tracker</h1>
-        <p className="text-sm text-zinc-500 mb-6">Your personal PM diary. Start by creating a Business Unit.</p>
+    <div className="flex-1 flex items-center justify-center bg-pm-bg">
+      <div className="text-center max-w-sm px-4">
+        <p className="text-[9px] uppercase tracking-[0.12em] text-pm-muted mb-6">PM Tracker</p>
+        <h1 className="text-xl font-semibold text-pm-text mb-2" style={{ letterSpacing: '-0.02em' }}>
+          Your personal PM diary
+        </h1>
+        <p className="text-[12px] text-pm-muted mb-8">
+          Start by creating a Business Unit.
+        </p>
         <form onSubmit={submit} className="flex gap-2">
           <input
             autoFocus
             value={name}
             onChange={e => setName(e.target.value)}
             placeholder="e.g. Engineering, Marketing…"
-            className="flex-1 text-sm bg-zinc-800 text-zinc-100 border border-zinc-600 rounded-lg px-3 py-2 outline-none focus:border-teal-500"
+            className="flex-1 text-[12px] bg-pm-surface text-pm-text border border-pm-border rounded-lg px-3 py-2 outline-none focus:border-pm-accent transition-colors placeholder-pm-muted"
           />
-          <button type="submit" className="bg-teal-600 hover:bg-teal-500 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors">
+          <button type="submit" className="bg-pm-accent text-pm-bg text-[12px] font-semibold px-4 py-2 rounded-lg transition-colors hover:opacity-90">
             Create
           </button>
         </form>

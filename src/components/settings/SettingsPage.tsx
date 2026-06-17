@@ -54,19 +54,19 @@ export default function SettingsPage() {
     <div className="flex-1 overflow-y-auto">
       <div className="max-w-lg mx-auto px-6 py-8">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-base font-semibold text-white">Settings</h1>
+          <h1 className="text-[13px] font-semibold text-pm-text">Settings</h1>
           <button
             onClick={() => dispatch({ type: 'TOGGLE_SETTINGS' })}
-            className="text-xs text-zinc-500 hover:text-zinc-300"
+            className="text-[11px] text-pm-muted hover:text-pm-text-2"
           >
             ← Back
           </button>
         </div>
 
-        <h2 className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-3">Statuses</h2>
-        <p className="text-[10px] text-zinc-600 mb-2">Drag to reorder</p>
+        <h2 className="text-[9px] font-medium text-pm-muted uppercase tracking-[0.1em] mb-3">Statuses</h2>
+        <p className="text-[10px] text-pm-muted mb-2">Drag to reorder</p>
 
-        <div className="bg-zinc-800 rounded-lg border border-zinc-700 divide-y divide-zinc-700 mb-4">
+        <div className="bg-pm-surface rounded-lg border border-pm-border divide-y divide-pm-border mb-4">
           {displayedStatuses.map(status => (
             <div
               key={status.id}
@@ -76,10 +76,10 @@ export default function SettingsPage() {
               onDragEnd={handleDragEnd}
               className={`flex items-center gap-3 px-4 py-3 cursor-grab select-none ${dragId === status.id ? 'opacity-50' : ''}`}
             >
-              <span className="text-zinc-600 text-xs">⠿</span>
+              <span className="text-pm-muted text-xs">⠿</span>
               <div className="w-3 h-3 rounded-full shrink-0" style={{ background: status.color }} />
-              <span className="text-sm text-zinc-200 flex-1">{status.label}</span>
-              <span className="text-[10px] text-zinc-600">{status.scope}</span>
+              <span className="text-pm-text-2 flex-1">{status.label}</span>
+              <span className="text-[10px] text-pm-muted">{status.scope}</span>
               {!status.isDefault && (
                 <button
                   onClick={() => {
@@ -90,24 +90,24 @@ export default function SettingsPage() {
                     }
                     dispatch({ type: 'DELETE_STATUS', id: status.id })
                   }}
-                  className="text-zinc-600 hover:text-red-400 text-[11px]"
+                  className="text-pm-muted hover:text-pm-danger text-[11px]"
                 >
                   Delete
                 </button>
               )}
-              {status.isDefault && <span className="text-[10px] text-zinc-700">🔒</span>}
+              {status.isDefault && <span className="text-pm-dim text-[10px]">🔒</span>}
             </div>
           ))}
         </div>
 
-        <form onSubmit={addStatus} className="bg-zinc-800 rounded-lg border border-zinc-700 p-4">
-          <p className="text-xs font-medium text-zinc-400 mb-3">Add custom status</p>
+        <form onSubmit={addStatus} className="bg-pm-surface rounded-lg border border-pm-border p-4">
+          <p className="text-[11px] font-medium text-pm-muted mb-3">Add custom status</p>
           <div className="flex gap-2 mb-3">
             <input
               value={label}
               onChange={e => setLabel(e.target.value)}
               placeholder="Status label"
-              className="flex-1 text-xs bg-zinc-700 text-zinc-100 border border-zinc-600 rounded px-2 py-1.5 outline-none focus:border-teal-500"
+              className="flex-1 text-[11px] bg-pm-surface-up text-pm-text border border-pm-border rounded px-2 py-1.5 outline-none focus:border-pm-accent"
             />
             <input
               type="color"
@@ -128,15 +128,15 @@ export default function SettingsPage() {
             ))}
           </div>
           <div className="flex items-center gap-3 mb-3">
-            <span className="text-xs text-zinc-500">Scope:</span>
+            <span className="text-[11px] text-pm-text-2">Scope:</span>
             {(['global', 'project'] as const).map(s => (
-              <label key={s} className="flex items-center gap-1 text-xs text-zinc-300 cursor-pointer">
-                <input type="radio" value={s} checked={scope === s} onChange={() => setScope(s)} className="accent-teal-500" />
+              <label key={s} className="flex items-center gap-1 text-[11px] text-pm-text-2 cursor-pointer">
+                <input type="radio" value={s} checked={scope === s} onChange={() => setScope(s)} className="accent-[var(--pm-accent)]" />
                 {s === 'global' ? 'Global (all projects)' : 'Current project'}
               </label>
             ))}
           </div>
-          <button type="submit" className="bg-teal-600 hover:bg-teal-500 text-white text-xs font-semibold px-3 py-1.5 rounded transition-colors">
+          <button type="submit" className="bg-pm-accent text-pm-bg text-[11px] font-semibold px-3 py-1.5 rounded transition-colors hover:opacity-90">
             Add status
           </button>
         </form>
