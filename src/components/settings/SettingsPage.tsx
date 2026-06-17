@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useApp } from '../../context/AppContext'
 
 const PRESET_COLORS = ['#71717a', '#f59e0b', '#6366f1', '#14b8a6', '#ef4444', '#f97316', '#8b5cf6', '#ec4899', '#3b82f6', '#22c55e']
@@ -8,8 +8,15 @@ export default function SettingsPage() {
   const [label, setLabel] = useState('')
   const [color, setColor] = useState('#6366f1')
   const [scope, setScope] = useState<'global' | 'project'>('global')
+  const [dragId, setDragId] = useState<string | null>(null)
 
   const statuses = [...state.statuses].sort((a, b) => a.order - b.order)
+  const [orderedIds, setOrderedIds] = useState<string[]>(() => statuses.map(s => s.id))
+
+  useEffect(() => {
+    setOrderedIds(statuses.map(s => s.id))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [statuses.map(s => s.id).join(',')])
 
   function addStatus(e: React.FormEvent) {
     e.preventDefault()
@@ -17,6 +24,31 @@ export default function SettingsPage() {
     dispatch({ type: 'ADD_STATUS', label: label.trim(), color, scope })
     setLabel('')
   }
+
+  function handleDragStart(id: string) { setDragId(id) }
+
+  function handleDragOver(e: React.DragEvent, overId: string) {
+    e.preventDefault()
+    if (!dragId || dragId === overId) return
+    setOrderedIds(prev => {
+      const ids = [...prev]
+      const from = ids.indexOf(dragId)
+      const to = ids.indexOf(overId)
+      if (from === -1 || to === -1) return prev
+      ids.splice(from, 1)
+      ids.splice(to, 0, dragId)
+      return ids
+    })
+  }
+
+  function handleDragEnd() {
+    if (dragId) dispatch({ type: 'REORDER_STATUSES', ids: orderedIds })
+    setDragId(null)
+  }
+
+  const displayedStatuses = orderedIds
+    .map(id => statuses.find(s => s.id === id))
+    .filter((s): s is typeof statuses[0] => s !== undefined)
 
   return (
     <div className="flex-1 overflow-y-auto">
@@ -32,10 +64,19 @@ export default function SettingsPage() {
         </div>
 
         <h2 className="text-xs font-semibold text-zinc-400 uppercase tracking-widest mb-3">Statuses</h2>
+        <p className="text-[10px] text-zinc-600 mb-2">Drag to reorder</p>
 
         <div className="bg-zinc-800 rounded-lg border border-zinc-700 divide-y divide-zinc-700 mb-4">
-          {statuses.map(status => (
-            <div key={status.id} className="flex items-center gap-3 px-4 py-3">
+          {displayedStatuses.map(status => (
+            <div
+              key={status.id}
+              draggable
+              onDragStart={() => handleDragStart(status.id)}
+              onDragOver={e => handleDragOver(e, status.id)}
+              onDragEnd={handleDragEnd}
+              className={`flex items-center gap-3 px-4 py-3 cursor-grab select-none ${dragId === status.id ? 'opacity-50' : ''}`}
+            >
+              <span className="text-zinc-600 text-xs">⠿</span>
               <div className="w-3 h-3 rounded-full shrink-0" style={{ background: status.color }} />
               <span className="text-sm text-zinc-200 flex-1">{status.label}</span>
               <span className="text-[10px] text-zinc-600">{status.scope}</span>
