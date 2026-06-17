@@ -1,7 +1,7 @@
 import { useApp } from '../../context/AppContext'
 import type { Item } from '../../types'
 import Badge from '../ui/Badge'
-import { formatDate } from '../../utils/date'
+import { formatDate, isOverdue } from '../../utils/date'
 
 interface Props { item: Item }
 
@@ -12,6 +12,7 @@ export default function ItemCard({ item }: Props) {
   const subTasks = state.subTasks.filter(st => st.itemId === item.id)
   const doneSubs = subTasks.filter(st => st.done).length
   const isDone = status?.id === 'done'
+  const overdue = isOverdue(item.deadline)
 
   return (
     <button
@@ -29,7 +30,11 @@ export default function ItemCard({ item }: Props) {
         {status && <Badge label={status.label} color={status.color} />}
       </div>
       <div className="flex gap-2 mt-1 text-[10px] text-zinc-600">
-        {item.deadline && <span>⏰ {formatDate(item.deadline)}</span>}
+        {item.deadline && (
+          <span className={overdue ? 'text-red-400' : ''}>
+            ⏰ {formatDate(item.deadline)}{overdue && ' · overdue'}
+          </span>
+        )}
         {subTasks.length > 0 && <span>{doneSubs}/{subTasks.length} tasks</span>}
       </div>
     </button>

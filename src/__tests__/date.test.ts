@@ -13,3 +13,17 @@ describe('date utils', () => {
     expect(new Date(iso).getTime()).toBeGreaterThan(0)
   })
 })
+
+import { isOverdue } from '../utils/date'
+
+describe('isOverdue', () => {
+  it('returns true for a past date', () => {
+    expect(isOverdue('2020-01-01')).toBe(true)
+  })
+  it('returns false for a future date', () => {
+    expect(isOverdue('2099-01-01')).toBe(false)
+  })
+  it('returns false for null', () => {
+    expect(isOverdue(null)).toBe(false)
+  })
+})

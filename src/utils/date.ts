@@ -11,3 +11,8 @@ export function formatDateTime(iso: string): string {
 export function nowISO(): string {
   return new Date().toISOString()
 }
+
+export function isOverdue(deadline: string | null): boolean {
+  if (!deadline) return false
+  return new Date(deadline) < new Date(new Date().toDateString())
+}

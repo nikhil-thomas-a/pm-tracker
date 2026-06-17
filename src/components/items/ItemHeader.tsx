@@ -1,4 +1,5 @@
 import { useApp } from '../../context/AppContext'
+import { isOverdue } from '../../utils/date'
 
 export default function ItemHeader() {
   const { state, dispatch } = useApp()
@@ -32,7 +33,7 @@ export default function ItemHeader() {
         </select>
       </div>
       <div className="flex items-center gap-4 text-[10px] text-zinc-500">
-        <label className="flex items-center gap-1">
+        <label className={`flex items-center gap-1 ${item.deadline && isOverdue(item.deadline) ? 'text-red-400' : ''}`}>
           ⏰
           <input
             type="date"
