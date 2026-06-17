@@ -27,7 +27,15 @@ export default function TopBar() {
       try {
         const text = await file.text()
         const data = JSON.parse(text)
-        if (!Array.isArray(data.businessUnits) || !Array.isArray(data.statuses)) throw new Error('Invalid file')
+        function isArrayOfObjects(arr: unknown): arr is Record<string, unknown>[] {
+          return Array.isArray(arr) && arr.every(item => typeof item === 'object' && item !== null && 'id' in item)
+        }
+        if (
+          !isArrayOfObjects(data.businessUnits) ||
+          !isArrayOfObjects(data.statuses) ||
+          !isArrayOfObjects(data.projects) ||
+          !isArrayOfObjects(data.items)
+        ) throw new Error('Invalid file')
         if (confirm('This will overwrite all current data. Continue?')) {
           dispatch({ type: 'IMPORT_DATA', data })
         }
