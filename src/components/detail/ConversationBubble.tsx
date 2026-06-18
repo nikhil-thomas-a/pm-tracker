@@ -1,4 +1,4 @@
-import DOMPurify from 'dompurify'
+﻿import DOMPurify from 'dompurify'
 import { formatDateTime } from '../../utils/date'
 import type { ConversationEntry } from '../../types'
 
@@ -12,11 +12,11 @@ export default function ConversationBubble({ entry }: Props) {
 
   return (
     <div className="mb-4">
-      <p className="text-[9px] text-pm-muted uppercase tracking-wider mb-1">
+      <p className="text-[11px] text-pm-muted uppercase tracking-wider mb-1">
         {formatDateTime(entry.createdAt)}
       </p>
       <div
-        className="bg-pm-surface border border-pm-border rounded-tl-sm rounded-tr-xl rounded-br-xl rounded-bl-xl px-3 py-2 text-xs text-pm-text-2 leading-relaxed"
+        className="bg-pm-surface border border-pm-border rounded-tl-sm rounded-tr-xl rounded-br-xl rounded-bl-xl px-3 py-2 text-[13px] text-pm-text-2 leading-relaxed"
         dangerouslySetInnerHTML={{ __html: safeHtml }}
       />
     </div>

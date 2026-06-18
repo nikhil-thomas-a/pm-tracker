@@ -1,4 +1,4 @@
-import { useApp } from '../../context/AppContext'
+﻿import { useApp } from '../../context/AppContext'
 import type { TabId } from '../../types'
 
 const TABS: { id: TabId; label: string }[] = [
@@ -18,8 +18,8 @@ export default function TabBar() {
           onClick={() => dispatch({ type: 'SET_ACTIVE_TAB', tab: tab.id })}
           className={
             state.activeTab === tab.id
-              ? 'text-pm-accent text-[10px] uppercase tracking-[0.1em] font-medium border-b-2 border-pm-accent pb-2 px-3 transition-colors'
-              : 'text-pm-muted text-[10px] uppercase tracking-[0.1em] font-medium border-b-2 border-transparent pb-2 px-3 hover:text-pm-text-2 transition-colors'
+              ? 'text-pm-accent text-[12px] uppercase tracking-[0.1em] font-medium border-b-2 border-pm-accent pb-2 px-3 transition-colors'
+              : 'text-pm-muted text-[12px] uppercase tracking-[0.1em] font-medium border-b-2 border-transparent pb-2 px-3 hover:text-pm-text-2 transition-colors'
           }
         >
           {tab.label}

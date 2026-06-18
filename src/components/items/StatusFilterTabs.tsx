@@ -1,4 +1,4 @@
-import { useApp } from '../../context/AppContext'
+﻿import { useApp } from '../../context/AppContext'
 
 interface Props {
   activeStatusId: string | 'all'
@@ -20,8 +20,8 @@ export default function StatusFilterTabs({ activeStatusId, onChange }: Props) {
           onClick={() => onChange(s.id)}
           className={
             activeStatusId === s.id
-              ? 'bg-pm-accent text-pm-bg text-[9px] font-semibold px-2 py-0.5 rounded-full'
-              : 'border border-pm-border text-pm-muted text-[9px] px-2 py-0.5 rounded-full hover:text-pm-text-2 transition-colors'
+              ? 'bg-pm-accent text-pm-bg text-[11px] font-semibold px-2 py-0.5 rounded-full'
+              : 'border border-pm-border text-pm-muted text-[11px] px-2 py-0.5 rounded-full hover:text-pm-text-2 transition-colors'
           }
         >
           {s.label}

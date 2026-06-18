@@ -1,4 +1,4 @@
-import { useApp } from '../../context/AppContext'
+﻿import { useApp } from '../../context/AppContext'
 
 export default function TopBar() {
   const { state, dispatch } = useApp()
@@ -52,15 +52,15 @@ export default function TopBar() {
         PM Tracker
       </span>
       <div className="flex items-center gap-4">
-        <button onClick={handleExport} className="text-[11px] text-pm-muted hover:text-pm-text-2 transition-colors">
+        <button onClick={handleExport} className="text-[13px] text-pm-muted hover:text-pm-text-2 transition-colors">
           Export
         </button>
-        <button onClick={handleImport} className="text-[11px] text-pm-muted hover:text-pm-text-2 transition-colors">
+        <button onClick={handleImport} className="text-[13px] text-pm-muted hover:text-pm-text-2 transition-colors">
           Import
         </button>
         <button
           onClick={() => dispatch({ type: 'TOGGLE_SETTINGS' })}
-          className="text-[11px] text-pm-muted hover:text-pm-text-2 transition-colors"
+          className="text-[13px] text-pm-muted hover:text-pm-text-2 transition-colors"
           title="Settings"
         >
           Settings

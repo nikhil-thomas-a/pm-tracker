@@ -1,4 +1,4 @@
-import { useApp } from '../../context/AppContext'
+﻿import { useApp } from '../../context/AppContext'
 import { formatDateTime } from '../../utils/date'
 import type { ActivityType } from '../../types'
 import EmptyState from '../ui/EmptyState'
@@ -43,8 +43,8 @@ export default function ActivityTab() {
             )}
           </div>
           <div className="pb-4 flex-1">
-            <p className="text-xs text-pm-text-2">{entry.description}</p>
-            <p className="text-[9px] text-pm-muted mt-0.5">{formatDateTime(entry.createdAt)}</p>
+            <p className="text-[13px] text-pm-text-2">{entry.description}</p>
+            <p className="text-[11px] text-pm-muted mt-0.5">{formatDateTime(entry.createdAt)}</p>
           </div>
         </div>
       ))}

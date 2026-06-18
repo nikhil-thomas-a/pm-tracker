@@ -1,4 +1,4 @@
-import { useState } from 'react'
+﻿import { useState } from 'react'
 import { useApp } from '../../context/AppContext'
 
 export default function BuSelector() {
@@ -17,13 +17,13 @@ export default function BuSelector() {
 
   return (
     <div className="px-3 pt-3 pb-2 border-b border-pm-border-subtle">
-      <p className="text-[9px] uppercase tracking-[0.1em] font-medium text-pm-muted mb-2">Business Units</p>
+      <p className="text-[11px] uppercase tracking-[0.1em] font-medium text-pm-muted mb-2">Business Units</p>
       <div className="flex flex-wrap gap-1 mb-2">
         {businessUnits.map(bu => (
           <div key={bu.id} className="group relative inline-flex items-center">
             <button
               onClick={() => dispatch({ type: 'SELECT_BU', id: bu.id })}
-              className={`text-[10px] font-medium px-2 py-0.5 rounded pr-5 ${
+              className={`text-[12px] font-medium px-2 py-0.5 rounded pr-5 ${
                 selectedBuId === bu.id
                   ? 'bg-pm-accent text-pm-bg'
                   : 'bg-pm-surface-up text-pm-text-2 hover:text-pm-text transition-colors'
@@ -41,7 +41,7 @@ export default function BuSelector() {
                   : `Delete "${bu.name}"?`
                 if (confirm(msg)) dispatch({ type: 'DELETE_BU', id: bu.id })
               }}
-              className="absolute right-0.5 opacity-0 group-hover:opacity-100 text-[9px] text-pm-muted hover:text-pm-danger transition-opacity w-4 h-4 flex items-center justify-center"
+              className="absolute right-0.5 opacity-0 group-hover:opacity-100 text-[11px] text-pm-muted hover:text-pm-danger transition-opacity w-4 h-4 flex items-center justify-center"
               title="Delete unit"
             >
               ✕
@@ -56,13 +56,13 @@ export default function BuSelector() {
             value={name}
             onChange={e => setName(e.target.value)}
             placeholder="Unit name"
-            className="flex-1 text-[11px] bg-pm-surface-up text-pm-text border border-pm-border rounded px-2 py-1 outline-none focus:border-pm-accent"
+            className="flex-1 text-[13px] bg-pm-surface-up text-pm-text border border-pm-border rounded px-2 py-1 outline-none focus:border-pm-accent"
           />
-          <button type="submit" className="text-[10px] text-pm-accent hover:text-pm-text-2 px-1">Add</button>
-          <button type="button" onClick={() => { setAdding(false); setName('') }} className="text-[10px] text-pm-muted hover:text-pm-text-2 px-1">✕</button>
+          <button type="submit" className="text-[12px] text-pm-accent hover:text-pm-text-2 px-1">Add</button>
+          <button type="button" onClick={() => { setAdding(false); setName('') }} className="text-[12px] text-pm-muted hover:text-pm-text-2 px-1">✕</button>
         </form>
       ) : (
-        <button onClick={() => setAdding(true)} className="text-[10px] text-pm-accent hover:text-pm-text-2">
+        <button onClick={() => setAdding(true)} className="text-[12px] text-pm-accent hover:text-pm-text-2">
           + New Unit
         </button>
       )}

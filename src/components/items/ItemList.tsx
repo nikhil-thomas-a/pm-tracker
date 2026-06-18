@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+﻿import { useState, useEffect } from 'react'
 import { useApp } from '../../context/AppContext'
 import ItemCard from './ItemCard'
 import StatusFilterTabs from './StatusFilterTabs'
@@ -45,12 +45,12 @@ export default function ItemList() {
   return (
     <div className="flex flex-col h-full overflow-hidden">
       <div className="px-3 pt-3 pb-2 border-b border-pm-border-subtle">
-        <p className="text-[11px] font-semibold text-pm-text truncate">{project.name}</p>
+        <p className="text-[13px] font-semibold text-pm-text truncate">{project.name}</p>
         <input
           value={search}
           onChange={e => setSearch(e.target.value)}
           placeholder="Search items…"
-          className="mt-1.5 w-full text-[10px] bg-transparent text-pm-text-2 placeholder-pm-muted outline-none border-b border-transparent focus:border-pm-border transition-colors pb-0.5"
+          className="mt-1.5 w-full text-[12px] bg-transparent text-pm-text-2 placeholder-pm-muted outline-none border-b border-transparent focus:border-pm-border transition-colors pb-0.5"
         />
       </div>
       <StatusFilterTabs activeStatusId={filterStatus} onChange={setFilterStatus} />
@@ -69,13 +69,13 @@ export default function ItemList() {
               value={title}
               onChange={e => setTitle(e.target.value)}
               placeholder="Item title"
-              className="flex-1 text-[10px] bg-pm-surface-up text-pm-text border border-pm-border rounded px-2 py-1 outline-none focus:border-pm-accent"
+              className="flex-1 text-[12px] bg-pm-surface-up text-pm-text border border-pm-border rounded px-2 py-1 outline-none focus:border-pm-accent"
             />
-            <button type="submit" className="text-[10px] text-pm-accent">Add</button>
-            <button type="button" onClick={() => { setAdding(false); setTitle('') }} className="text-[10px] text-pm-muted">✕</button>
+            <button type="submit" className="text-[12px] text-pm-accent">Add</button>
+            <button type="button" onClick={() => { setAdding(false); setTitle('') }} className="text-[12px] text-pm-muted">✕</button>
           </form>
         ) : (
-          <button onClick={() => setAdding(true)} className="text-[10px] text-pm-accent hover:text-pm-text-2">
+          <button onClick={() => setAdding(true)} className="text-[12px] text-pm-accent hover:text-pm-text-2">
             + New Item
           </button>
         )}

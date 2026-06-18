@@ -1,4 +1,4 @@
-import { useApp } from '../../context/AppContext'
+﻿import { useApp } from '../../context/AppContext'
 import type { Project } from '../../types'
 
 interface Props { project: Project }
@@ -28,17 +28,17 @@ export default function ProjectListItem({ project }: Props) {
       }`}
     >
       <div className="flex items-center justify-between gap-1">
-        <p className="text-[11px] font-medium truncate flex-1" style={{ letterSpacing: '-0.01em' }}>{project.name}</p>
+        <p className="text-[13px] font-medium truncate flex-1" style={{ letterSpacing: '-0.01em' }}>{project.name}</p>
         <span
           role="button"
           onClick={handleDelete}
-          className="opacity-0 group-hover:opacity-100 text-pm-muted hover:text-pm-danger text-[10px] transition-opacity shrink-0"
+          className="opacity-0 group-hover:opacity-100 text-pm-muted hover:text-pm-danger text-[12px] transition-opacity shrink-0"
           title="Delete project"
         >
           ✕
         </span>
       </div>
-      <p className="text-[9px] text-pm-muted mt-0.5">
+      <p className="text-[11px] text-pm-muted mt-0.5">
         {state.items.filter(i => i.projectId === project.id).length} items
       </p>
     </button>

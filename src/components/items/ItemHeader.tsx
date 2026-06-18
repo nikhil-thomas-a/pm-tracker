@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+﻿import { useState, useEffect } from 'react'
 import { useApp } from '../../context/AppContext'
 import { isOverdue } from '../../utils/date'
 
@@ -34,13 +34,13 @@ export default function ItemHeader() {
               setLocalTitle(item.title)
             }
           }}
-          className="flex-1 text-[13px] font-semibold text-pm-text bg-transparent outline-none border-b border-transparent focus:border-pm-accent transition-colors"
+          className="flex-1 text-[15px] font-semibold text-pm-text bg-transparent outline-none border-b border-transparent focus:border-pm-accent transition-colors"
           style={{ letterSpacing: '-0.01em' }}
         />
         <select
           value={item.statusId}
           onChange={e => dispatch({ type: 'CHANGE_ITEM_STATUS', id: item.id, statusId: e.target.value })}
-          className="text-[10px] rounded-full px-2 py-0.5 border outline-none cursor-pointer"
+          className="text-[12px] rounded-full px-2 py-0.5 border outline-none cursor-pointer"
           style={{ background: `${status?.color ?? '#71717a'}22`, color: status?.color ?? '#71717a', borderColor: `${status?.color ?? '#71717a'}55` }}
         >
           {projectStatuses.map(s => (
@@ -61,9 +61,9 @@ export default function ItemHeader() {
         }}
         placeholder="Add a description…"
         rows={2}
-        className="w-full mt-1 text-[11px] text-pm-text-2 placeholder-pm-muted bg-transparent outline-none resize-none border-b border-transparent focus:border-pm-border transition-colors pb-0.5"
+        className="w-full mt-1 text-[13px] text-pm-text-2 placeholder-pm-muted bg-transparent outline-none resize-none border-b border-transparent focus:border-pm-border transition-colors pb-0.5"
       />
-      <div className="flex items-center gap-4 text-[10px] text-pm-muted mt-2">
+      <div className="flex items-center gap-4 text-[12px] text-pm-muted mt-2">
         <label className={`flex items-center gap-1 ${item.deadline && isOverdue(item.deadline) ? 'text-pm-danger' : ''}`}>
           ⏰
           <input

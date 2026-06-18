@@ -1,4 +1,4 @@
-import { useEditor, EditorContent } from '@tiptap/react'
+﻿import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
 import Link from '@tiptap/extension-link'
@@ -31,7 +31,7 @@ export default function ConversationCompose({ itemId }: Props) {
           { label: 'U', action: () => editor?.chain().focus().toggleUnderline().run() },
           { label: '•', action: () => editor?.chain().focus().toggleBulletList().run() },
         ].map(({ label, action }) => (
-          <button key={label} onClick={action} className="text-xs text-pm-muted hover:text-pm-text border border-pm-border rounded px-1.5 py-0.5 transition-colors">
+          <button key={label} onClick={action} className="text-[13px] text-pm-muted hover:text-pm-text border border-pm-border rounded px-1.5 py-0.5 transition-colors">
             {label}
           </button>
         ))}
@@ -42,7 +42,7 @@ export default function ConversationCompose({ itemId }: Props) {
       <div className="flex justify-end">
         <button
           onClick={submit}
-          className="bg-pm-accent hover:opacity-90 text-pm-bg text-xs font-semibold px-3 py-1.5 rounded transition-opacity"
+          className="bg-pm-accent hover:opacity-90 text-pm-bg text-[13px] font-semibold px-3 py-1.5 rounded transition-opacity"
         >
           Add entry
         </button>
